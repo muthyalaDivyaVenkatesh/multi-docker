@@ -19,3 +19,16 @@ after_success:
   -docker build -t 12007158/multi-ngnix   
   -docker build -t 12007158/multi-server  
   -docker build -t 12007158/multi-worker
+
+deploy:
+  provider:elasticbeanstalk
+  region:us-east-2
+  app:multi-docker
+  env:Multidocker-env
+  bucket_name:elasticbeanstalk-us-east-2-552061799873
+  bucket_path:docker-multi
+  on:
+    branch:master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key:
+      secure: $AWS_SECRET_KEY
